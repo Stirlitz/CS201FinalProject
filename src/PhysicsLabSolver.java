@@ -44,12 +44,12 @@ public class PhysicsLabSolver {
 
         MotionTypeIncreaser distanceToVelocity = new MotionTypeIncreaser(distanceTimeArray);
         Double[][] velocityTimeArray = distanceToVelocity.increaseMotionType();
-        TablePrinter velocityTable = new TablePrinter(velocityTimeArray, "Velocity");
+        TablePrinter velocityTable = new TablePrinter(velocityTimeArray, "Velocity", timeDecimalPlaces, motionDecimalPlaces);
         velocityTable.printTable();
 
         MotionTypeIncreaser velocityToAcceleration = new MotionTypeIncreaser(velocityTimeArray);
         Double[][] accelerationTimeArray = velocityToAcceleration.increaseMotionType();
-        TablePrinter accelerationTable = new TablePrinter(accelerationTimeArray, "Acceleration");
+        TablePrinter accelerationTable = new TablePrinter(accelerationTimeArray, "Acceleration", timeDecimalPlaces, motionDecimalPlaces);
         accelerationTable.printTable();
 
 

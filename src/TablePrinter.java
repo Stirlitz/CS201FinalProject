@@ -8,6 +8,7 @@ Peter Fajner
 import javax.swing.*; 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 
 /** Prints out motion vs time tables.
 */
@@ -17,22 +18,26 @@ public class TablePrinter {
     private Object[][] motionTimeData;
     private String motionName;
 
-    public static Double[][] round(Double[][] inputArray, int timeDecimalPlaces, int motionDecimalPlaces) {
-        Double[][] outputArray = inputArray;
-        // Time
+    /** Rounds a time-motion array to a certain number of decimal places, and pads numbers with zeroes if necessary.
+        @param inputArray time-motion array
+        @param timeDecimalPlaces number of decimal places to round the time values to
+        @param motionDecimalPlaces number of decimal places to round the motion values to
+        @return the rounded time-motion array, as a String
+    */
+    public static String[][] round(Double[][] inputArray, int timeDecimalPlaces, int motionDecimalPlaces) {
+        // New String[][] array, same size as input array
+        String[][] outputArray = new String[inputArray.length][inputArray[0].length];
+        // Rounds or pads time values, converting them into Strings
         for(int i = 0; i < outputArray.length; i++) {
-            BigDecimal tempBigDecimal = new BigDecimal(outputArray[i][0]);
-            tempBigDecimal = tempBigDecimal.setScale(timeDecimalPlaces, RoundingMode.HALF_UP);
-            outputArray[i][0] = tempBigDecimal.doubleValue();
+            outputArray[i][0] = String.format("%." + timeDecimalPlaces + "f", inputArray[i][0]);
         }
-        // Motion
+        // Rounds or pads motion values, converting them into Strings
         for(int i = 0; i < outputArray.length; i++) {
-            BigDecimal tempBigDecimal = new BigDecimal(outputArray[i][1]);
-            tempBigDecimal = tempBigDecimal.setScale(motionDecimalPlaces, RoundingMode.HALF_UP);
-            outputArray[i][1] = tempBigDecimal.doubleValue();
+            outputArray[i][1] = String.format("%." + motionDecimalPlaces + "f", inputArray[i][1]);
         }
         return outputArray;
     }
+
 
     public TablePrinter(Double[][] motionTimeData, String motionName, int timeDecimalPlaces, int motionDecimalPlaces) {
         this.columnNames = new String[]{"Time", motionName};
