@@ -19,20 +19,17 @@ public class TablePrinter {
 
     public static Double[][] round(Double[][] inputArray, int timeDecimalPlaces, int motionDecimalPlaces) {
         Double[][] outputArray = inputArray;
-        System.out.println(outputArray[0].length);
         // Time
         for(int i = 0; i < outputArray.length; i++) {
             BigDecimal tempBigDecimal = new BigDecimal(outputArray[i][0]);
             tempBigDecimal = tempBigDecimal.setScale(timeDecimalPlaces, RoundingMode.HALF_UP);
             outputArray[i][0] = tempBigDecimal.doubleValue();
-            System.out.println("i" + tempBigDecimal.doubleValue());
         }
         // Motion
         for(int i = 0; i < outputArray.length; i++) {
             BigDecimal tempBigDecimal = new BigDecimal(outputArray[i][1]);
             tempBigDecimal = tempBigDecimal.setScale(motionDecimalPlaces, RoundingMode.HALF_UP);
             outputArray[i][1] = tempBigDecimal.doubleValue();
-            System.out.println(tempBigDecimal.doubleValue());
         }
         return outputArray;
     }
@@ -41,7 +38,12 @@ public class TablePrinter {
         this.columnNames = new String[]{"Time", motionName};
         this.motionTimeData = round(motionTimeData, timeDecimalPlaces, motionDecimalPlaces);
         this.motionName = motionName;
+    }
 
+    public TablePrinter(Double[][] motionTimeData, String motionName) {
+        this.columnNames = new String[]{"Time", motionName};
+        this.motionTimeData = motionTimeData;
+        this.motionName = motionName;
     }
 
     public void printTable() {

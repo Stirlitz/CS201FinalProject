@@ -37,10 +37,15 @@ public class PhysicsLabSolver {
 
         }
 
-        TablePrinter distanceTable = new TablePrinter(distanceTimeArray, "Distance", timeDecimalPlaces, motionDecimalPlaces);
+        TablePrinter distanceTable = new TablePrinter(distanceTimeArray, "Distance");
         distanceTable.printTable();
 
         //System.out.println(Arrays.deepToString(distanceTimeArray));
+
+        MotionTypeIncreaser distanceToVelocity = new MotionTypeIncreaser(distanceTimeArray);
+        Double[][] velocityTimeArray = distanceToVelocity.increaseMotionType();
+        TablePrinter velocityTable = new TablePrinter(velocityTimeArray, "Velocity");
+        velocityTable.printTable();
 
 
 
