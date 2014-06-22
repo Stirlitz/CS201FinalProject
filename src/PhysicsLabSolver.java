@@ -18,6 +18,8 @@ public class PhysicsLabSolver {
         
         Scanner kInputInt = new Scanner(System.in);
         Scanner kInput = new Scanner(System.in);
+        TablePrinter tablePrinter = new TablePrinter();
+        MotionTypeIncreaser motionTypeIncreaser = new MotionTypeIncreaser();
         int numberOfPoints;
 
         System.out.print("How many data points will you be entering? ");
@@ -34,26 +36,14 @@ public class PhysicsLabSolver {
             distanceTimeArray[i][0] = new Double(kInput.nextDouble());
             System.out.print("Enter value for point #" + (i + 1) + ": ");
             distanceTimeArray[i][1] = new Double(kInput.nextDouble());
-
         }
 
-        TablePrinter distanceTable = new TablePrinter(distanceTimeArray, "Distance");
-        distanceTable.printTable();
+        tablePrinter.printTable(distanceTimeArray, "Distance", timeDecimalPlaces, motionDecimalPlaces);
 
-        //System.out.println(Arrays.deepToString(distanceTimeArray));
+        Double[][] velocityTimeArray = motionTypeIncreaser.increaseMotionType(distanceTimeArray);
+        tablePrinter.printTable(velocityTimeArray, "Velocity", timeDecimalPlaces, motionDecimalPlaces);
 
-        MotionTypeIncreaser distanceToVelocity = new MotionTypeIncreaser(distanceTimeArray);
-        Double[][] velocityTimeArray = distanceToVelocity.increaseMotionType();
-        TablePrinter velocityTable = new TablePrinter(velocityTimeArray, "Velocity", timeDecimalPlaces, motionDecimalPlaces);
-        velocityTable.printTable();
-
-        MotionTypeIncreaser velocityToAcceleration = new MotionTypeIncreaser(velocityTimeArray);
-        Double[][] accelerationTimeArray = velocityToAcceleration.increaseMotionType();
-        TablePrinter accelerationTable = new TablePrinter(accelerationTimeArray, "Acceleration", timeDecimalPlaces, motionDecimalPlaces);
-        accelerationTable.printTable();
-
-
-
-
+        Double[][] accelerationTimeArray = motionTypeIncreaser.increaseMotionType(velocityTimeArray);
+        tablePrinter.printTable(accelerationTimeArray, "Acceleration", timeDecimalPlaces, motionDecimalPlaces);
     }
 }

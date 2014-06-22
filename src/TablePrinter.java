@@ -10,13 +10,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
-/** Prints out motion vs time tables.
+/** Prints out motion vs time table.
 */
 public class TablePrinter {
-
-    private String[] columnNames;
-    private Object[][] motionTimeData;
-    private String motionName;
 
     /** Rounds a time-motion array to a certain number of decimal places, and pads numbers with zeroes if necessary.
         @param inputArray time-motion array
@@ -38,34 +34,26 @@ public class TablePrinter {
         return outputArray;
     }
 
+    public TablePrinter() {};
 
-    public TablePrinter(Double[][] motionTimeData, String motionName, int timeDecimalPlaces, int motionDecimalPlaces) {
-        this.columnNames = new String[]{"Time", motionName};
-        this.motionTimeData = round(motionTimeData, timeDecimalPlaces, motionDecimalPlaces);
-        this.motionName = motionName;
-    }
+    public void printTable(Double[][] motionTimeData, String motionName, int timeDecimalPlaces, int motionDecimalPlaces) {
 
-    public TablePrinter(Double[][] motionTimeData, String motionName) {
-        this.columnNames = new String[]{"Time", motionName};
-        this.motionTimeData = motionTimeData;
-        this.motionName = motionName;
-    }
+        String[] columnNames = new String[]{"Time", motionName};
+        Object[][] motionTimeRounded = round(motionTimeData, timeDecimalPlaces, motionDecimalPlaces);
 
-    public void printTable() {
-
-        //Create and set up the window.
+        //Create and set up a window.
         JFrame frame = new JFrame("Time vs " + motionName + " Table");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create a table from the data
-        JTable motionTimeTable = new JTable(motionTimeData, columnNames);
+        JTable motionTimeTable = new JTable(motionTimeRounded, columnNames);
 
-        // Necessary window operations
+        // Necessary window operations for displaying table
         JScrollPane scrollPane = new JScrollPane(motionTimeTable);
         motionTimeTable.setFillsViewportHeight(true);
         frame.getContentPane().add(scrollPane);
 
-        //Display the window.
+        //Display the window
         frame.pack();
         frame.setVisible(true);
 
