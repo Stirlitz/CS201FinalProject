@@ -27,20 +27,20 @@ public class PhysicsLabSolver {
         System.out.print("How many decimal places should the motion values be rounded to? ");
         int decimalsForMotion = kInputInt.nextInt();
 
-        double[][] distanceTimeArray = new double[numberOfPoints][2];
+        Double[][] distanceTimeArray = new Double[numberOfPoints][2];
 
         for(int i = 0; i < numberOfPoints; i++) {
             System.out.print("Enter time for point #" + (i + 1) + ": ");
-            distanceTimeArray[i][0] = kInput.nextDouble();
+            distanceTimeArray[i][0] = new Double(kInput.nextDouble());
             System.out.print("Enter value for point #" + (i + 1) + ": ");
-            distanceTimeArray[i][1] = kInput.nextDouble();
+            distanceTimeArray[i][1] = new Double(kInput.nextDouble());
 
         }
 
-        //System.out.println(Arrays.deepToString(distanceTimeArray));
-
         TablePrinter distanceTable = new TablePrinter(distanceTimeArray, "Distance");
         distanceTable.printTable();
+
+        //System.out.println(Arrays.deepToString(distanceTimeArray));
 
 
 

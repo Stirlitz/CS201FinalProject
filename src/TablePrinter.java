@@ -15,9 +15,9 @@ public class TablePrinter {
     private Object[][] motionTimeData;
     private String motionName;
 
-    public TablePrinter(double[][] motionTimeData, String motionName) {
+    public TablePrinter(Double[][] motionTimeData, String motionName) {
         this.columnNames = new String[]{"Time", motionName};
-        this.motionTimeData = new Object[][]{motionTimeData};
+        this.motionTimeData = motionTimeData;
         this.motionName = motionName;
 
     }
@@ -25,7 +25,7 @@ public class TablePrinter {
     public void printTable() {
 
         //Create and set up the window.
-        JFrame frame = new JFrame("Time vs " + motionName + "Table");
+        JFrame frame = new JFrame("Time vs " + motionName + " Table");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Add the ubiquitous "Hello World" label.
