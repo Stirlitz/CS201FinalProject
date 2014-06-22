@@ -23,9 +23,9 @@ public class PhysicsLabSolver {
         System.out.print("How many data points will you be entering? ");
         numberOfPoints = kInputInt.nextInt();
         System.out.print("How many decimal places should the time values be rounded to? ");
-        int decimalsForTime = kInputInt.nextInt();
+        int timeDecimalPlaces = kInputInt.nextInt();
         System.out.print("How many decimal places should the motion values be rounded to? ");
-        int decimalsForMotion = kInputInt.nextInt();
+        int motionDecimalPlaces = kInputInt.nextInt();
 
         Double[][] distanceTimeArray = new Double[numberOfPoints][2];
 
@@ -37,7 +37,7 @@ public class PhysicsLabSolver {
 
         }
 
-        TablePrinter distanceTable = new TablePrinter(distanceTimeArray, "Distance");
+        TablePrinter distanceTable = new TablePrinter(distanceTimeArray, "Distance", timeDecimalPlaces, motionDecimalPlaces);
         distanceTable.printTable();
 
         //System.out.println(Arrays.deepToString(distanceTimeArray));
