@@ -47,6 +47,11 @@ public class PhysicsLabSolver {
         TablePrinter velocityTable = new TablePrinter(velocityTimeArray, "Velocity");
         velocityTable.printTable();
 
+        MotionTypeIncreaser velocityToAcceleration = new MotionTypeIncreaser(velocityTimeArray);
+        Double[][] accelerationTimeArray = velocityToAcceleration.increaseMotionType();
+        TablePrinter accelerationTable = new TablePrinter(accelerationTimeArray, "Acceleration");
+        accelerationTable.printTable();
+
 
 
 
