@@ -6,11 +6,18 @@ Peter Fajner
 */
 
 /** Changes Displacement into Velocity or Velocity into Acceleration.
+    "start" and "fin" are used in lieu of more thorough descriptions for easier readability, as there is a decent amount of algebra
 */
 public class MotionTypeIncreaser {
 
+    /** Initializes motion type increaser.
+    */
     public MotionTypeIncreaser() {};
 
+    /** Increases motion type.
+        @param start initial time-motion array
+        @return final time-motion array
+    */
     public Double[][] increaseMotionType(Double[][] start) {
         Double[][] fin = new Double[start.length - 1][2];
         for(int i = 0; i < (start.length - 1); i++) {
