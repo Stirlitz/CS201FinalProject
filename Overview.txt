@@ -1,0 +1,79 @@
+
+
+**NOTE:** This document was written in Sublime Text, where text automatically overflows into the next line. If opened in a simpler editor, lines of text may be extremely long.
+
+Peter Fajner
+2014-06-10
+Computer Science 201
+Final Project
+
+Main class: PhysicsLabSolver
+
+Github:
+    < https://github.com/Stirlitz/CS201FinalProject >
+    - does not contain entire history of project
+
+Problem:
+    Design a program that receives a distance-time table (i.e. of a moving object) and then returns a velocity-time and acceleration-time table, with time and motion values shown to a specified number of decimal places.
+
+Three key measures of success:
+    - Input is user-friendly, with the ability to go back and fix mistakes
+    - Tables generated with correct values
+    - Values printed to correct amount of decimal places
+
+Program overview:
+    < Flowchart.png >
+    OR
+    < Flowchart.dia > (using Dia flowchart software)
+
+Techniques used:
+    Decisions:
+        - checking for sentinel value during data input
+    Arrays:
+        - storing the motion-time data
+        - storing column names for tables
+    Loops:
+        - receiving motion data from user
+        - converting motion data
+    Classes/OOP:
+        - printing tables is done by a separate class
+        - converting motion types is done by a separate class
+
+Sample Output:
+    < see attached image SampleOutput.png for output tables >
+
+    How many data points will you be entering? 11
+    How many decimal places should the time values be rounded to? 3
+    How many decimal places should the motion values be rounded to? 1
+    Press C to return to previous point.
+    Enter time for point #1: 0
+    Enter distance for point #1: 0
+    Enter time for point #2: 0.05
+    Enter distance for point #2: 0.79
+    Enter time for point #3: 0.1
+    Enter distance for point #3: 2.1
+    Enter time for point #4: 0.15
+    Enter distance for point #4: 3.76
+    Enter time for point #5: 0.2
+    Enter distance for point #5: 6.06
+    Enter time for point #6: 0.25
+    Enter distance for point #6: 8.79
+    Enter time for point #7: 0.3
+    Enter distance for point #7: 11.93
+    Enter time for point #8: 0.35
+    Enter distance for point #8: 15.31
+    Enter time for point #9: 0.4
+    Enter distance for point #9: 19.52
+    Enter time for point #10: 0.45
+    Enter distance for point #10: 23.95
+    Enter time for point #11: 0.5
+    Enter distance for point #11: 29.05
+
+Notes:
+    - This program uses three classes (not counting built-in Java classes). However, the two non-main classes act more like glorified functions. Each of them has an empty initialization statement and only one method. They fulfil the program requirements in that they are modular and can be reused, but they act in a way that is more similar to the System.out class than the example CashRegister classes found in the textbook.
+
+Challenges faced:
+    - Rounding the numbers correctly. Initially I used BigDecimal, but this didn't allow me to pad zeroes, so I decided to try using String markup, using String.format().
+    - Deciding how to store the motion and time values. Initially I used separate double[] arrays, but that was unwieldy. I then tried a Double[][] with motion and time each being in its own column (i.e. Double[2][length]). However, I realized that the calculations would be much easier if a motion value was coupled with its time value, so I decided to use Double[length][2], where each row contains a single time value and a single motion value. If, in the future, I decide to implement a system where the tables will be organized in order of time values (assuming they are not inputted in the correct order), this will also allow easier reorganization of the array.
+    - Placing the array into a table. The array starts out as Double[][]. The process of rounding/padding converts it into a String[][]. JTables require an Object[][] as input, so the array had to be converted yet again. Thankfully, since the conversions were all from a "more restrictive" to a "less restrictive" data type, no data loss is possible.
+    - Allowing a user to re-enter a mistakenly-entered value. This was not difficult per se, just annoying. I implemented a system that checks for nextLine() and, if the input is not the sentinel value, parses the input into a Double. This has to be done twice (for motion and for time) resulting in something that looks unnecessarily bulky. The repetition could be removed by using a function, but that would add unnecessary complexity.
